@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Car from './Car';
+import getCarPrice from '../logic/getCarPrice.js';
 
 const CarsWrapper = styled.div`
   max-width: 1200px;
@@ -69,6 +70,11 @@ const CarsList = () => {
       });
   }, [distance, duration]);
 
+  const carsWithPrice = cars.map((car) => ({
+    ...car,
+    price: getCarPrice(distance, duration, car),
+  }));
+
   return (
     <div>
       <Form>
@@ -96,7 +102,7 @@ const CarsList = () => {
         </Label>
       </Form>
       <CarsWrapper>
-        {cars && cars.map((car, i) => (
+        {carsWithPrice && carsWithPrice.map((car, i) => (
           <Car key={car.id} style={{marginBottom: 30}} {...car} />
         ))}
       </CarsWrapper>

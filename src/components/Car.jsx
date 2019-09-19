@@ -54,15 +54,33 @@ const Title = styled.div`
   }
 `;
 
+const Price = styled.div`
+  position: absolute;
+  right: 0;
+  top: -50px;
+  padding: 4px 16px 9px 16px;
+  background: #50588c;
+  font-size: 20px;
+  color: #fff;
+  transform: translateX(5px);
+  transition: transform 300ms ease;
+
+  ${Wrapper}:hover & {
+    transform: translateX(0);
+  }
+`;
+
 const Car = ({
   picturePath,
   model,
   brand,
+  price,
 }) => (
   <Wrapper href="#">
     <Image src={`http://localhost:3001/${picturePath}`} alt={model} />
     <Content>
       <Title><span>{brand} {model}</span></Title>
+      <Price>{price}€</Price>
     </Content>
   </Wrapper>
 );
